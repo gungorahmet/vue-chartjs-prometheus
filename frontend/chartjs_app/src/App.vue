@@ -1,21 +1,25 @@
 <template>
   <div>
-    <p>{{ message }}</p>
+    <!-- <p>{{ message }}</p> -->
+    <LineChart />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import LineChart from './components/LineChart.vue'
 
 export default defineComponent({
+  name: 'App',
+  components: { LineChart },
   setup() {
-    const message = ref<string>('Loading...')
-    fetch('http://localhost:8000/api/v1/helloworld/')
-      .then(response => response.json())
-      .then(data => message.value = data.message)
-    return {
-      message,
-    }
+    // const message = ref<string>('Loading...')
+    // fetch('http://localhost:8000/api/v1/helloworld')
+    //   .then(response => response.json())
+    //   .then(data => message.value = data.message)
+    // return {
+    //   message,
+    // }
   },
 })
 </script>

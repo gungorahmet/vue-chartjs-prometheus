@@ -30,6 +30,25 @@ http://localhost:8000
 http://localhost:8001
 ```
 
+
+## Run manually
+
+- Backend
+
+```python
+# Path: vue-chartjs-prometheus/backend/chartjs
+pip install -r requirements.txt
+python manage.py runserver 0.0.0.0:8000
+```
+
+- Frontend 
+
+```python
+# Path: vue-chartjs-prometheus/frontend/chartjs_app
+npm install
+npm run dev -- --port 8001
+```
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

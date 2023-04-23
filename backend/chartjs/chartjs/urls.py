@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from metric.views import SimpleDataView
+from metric.views import HelloWorldDataView, GetDumbDataView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('api/v1/helloworld/', SimpleDataView.as_view()),
+    path('api/v1/helloworld', HelloWorldDataView.as_view()),
+    path('api/v1/get_dumb_data', GetDumbDataView.as_view()),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -1,17 +1,19 @@
 <template>
-  <div>
-    <!-- <p>{{ message }}</p> -->
-    <LineChart />
+
+  <div class="container">
+    <div class="chart1"><LineChart /></div>
+    <div class="chart2"><DoughnutChart /></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import LineChart from './components/LineChart.vue'
+import DoughnutChart from './components/DoughnutChart.vue'
 
 export default defineComponent({
   name: 'App',
-  components: { LineChart },
+  components: { LineChart, DoughnutChart },
   setup() {
     // const message = ref<string>('Loading...')
     // fetch('http://localhost:8000/api/v1/helloworld')
@@ -24,7 +26,16 @@ export default defineComponent({
 })
 </script>
 
+<style>
+.container {
+  display: flex;
+}
 
+.chart1,
+.chart2 {
+  flex: 1;
+}
+</style>
 
 
 <!-- <script setup lang="ts">

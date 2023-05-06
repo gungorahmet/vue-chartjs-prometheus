@@ -9,22 +9,22 @@
       </select>
     </div>
 
-    <Line v-if="loaded"
-        :data="chartData"
-        :options="chartOptions"
+    <Doughnut v-if="loaded"
+          :data="chartData"
+          :options="chartOptions"
     />
     <span v-if="!loaded"> Waiting for the chart.. </span>
   </div>
 </template>
 
 <script lang="ts">
-import { Line } from 'vue-chartjs'
+import { Doughnut } from 'vue-chartjs'
 import 'chart.js/auto'
 import axios from 'axios';
 
 export default {
-  name: 'LineChart',
-  components: { Line },
+  name: 'DoughnutChart',
+  components: { Doughnut },
   data: () => ({
     loaded: false,
     chartData: {
@@ -50,7 +50,7 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/get_dumb_line_chart_data', {
+        const response = await axios.get('http://localhost:8000/api/v1/get_dumb_doughnut_chart_data', {
           params: {
             option: this.selectedItem.id
           }

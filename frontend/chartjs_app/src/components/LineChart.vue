@@ -1,7 +1,14 @@
 <!-- Based on https://vue-chartjs.org/guide/#chart-with-local-data -->
 
 <template>
+
   <div class="container">
+    <div>
+      <select v-model="selectedItem" @change="fetchData">
+        <option v-for="item in dropdownItems" :value="item" :key="item.id">{{ item.name }}</option>
+      </select>
+    </div>
+
     <Line v-if="loaded"
         :data="chartData"
         :options="chartOptions"
@@ -15,6 +22,7 @@
 <script lang="ts">
 import { Line } from 'vue-chartjs'
 import 'chart.js/auto'
+import axios from 'axios';
 
 export default {
   name: 'LineChart',
@@ -26,19 +34,39 @@ export default {
             "datasets": []
         },
     chartOptions: {},
+    selectedItem: {
+              id: null
+            },
+    dropdownItems: [
+      { id: 1, name: 'Option 1' },
+      { id: 2, name: 'Option 2' },
+      { id: 3, name: 'Option 3' },
+      { id: 4, name: 'Option 4' },
+    ],
   }),
+
   async mounted () {
     this.loaded = false
+    this.fetchData();
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const response = await axios.get('http://localhost:8000/api/v1/get_dumb_data', {
+          params: {
+            option: this.selectedItem.id
+          }
+        });
+        const data = response.data;
+        console.log(this.selectedItem.id);
+        console.log(data);
 
-    try {
-      const response = await fetch('http://localhost:8000/api/v1/get_dumb_data')
-      const responseJSON = await response.json()
-
-      this.chartData = responseJSON.chart.chartData;
-      this.chartOptions = responseJSON.chart.chartOptions;
-      this.loaded = true;
-    } catch (e) {
-      console.error(e)
+        this.chartData = data.chart.chartData;
+        this.chartOptions = data.chart.chartOptions;
+        this.loaded = true;
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 }

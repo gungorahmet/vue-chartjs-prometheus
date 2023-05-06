@@ -10,7 +10,7 @@ class HelloWorldDataView(APIView):
         }
         return Response(data)
 
-class GetDumbDataView(APIView):
+class GetDumbDataLineChartView(APIView):
     def get(self, request):
         option = request.query_params.get('option', None)  # It's a string
 
@@ -56,6 +56,40 @@ class GetDumbDataView(APIView):
                             'suggestedMax': 100
                         }
                     }
+                }
+            }
+        }
+        return Response(response)
+
+
+class GetDumbDataDoughnutChartView(APIView):
+    def get(self, request):
+        option = request.query_params.get('option', None)  # It's a string
+
+        if not option:
+            data = [10, 30, 40, 20]
+        elif option == "1":
+            data = [60, 10, 15, 15]
+        elif option == "2":
+            data = [40, 30, 20, 10]
+        elif option == "3":
+            data = [25, 25, 25, 25]
+        else:
+            data = [70, 10, 15, 5]
+
+        response = {
+            'chart': {
+                'chartData': {
+                    'labels': ['Python', 'VueJs', 'TypeScript', 'JavaScript'],
+                    'datasets': [ 
+                                    {
+                                    'backgroundColor': ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                                    'data': data
+                                    }
+                                ]
+                },
+                'chartOptions': {
+                    'responsive': True,
                 }
             }
         }

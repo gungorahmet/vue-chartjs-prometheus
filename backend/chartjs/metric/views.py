@@ -3,6 +3,11 @@ import random
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from prometheus_client import Gauge, Counter
+
+request_count_line_chart_metric = Gauge('request_count_line_chart_metric', 'HTTP GET Request count of Line Chart')
+request_count_doughnut_chart_metric = Counter('request_count_doughnut_chart_metric', 'HTTP GET  Request count of Doughnut Chart')
+
 class HelloWorldDataView(APIView):
     def get(self, request):
         data = {
@@ -12,6 +17,8 @@ class HelloWorldDataView(APIView):
 
 class GetDumbDataLineChartView(APIView):
     def get(self, request):
+        request_count_line_chart_metric.inc()
+
         option = request.query_params.get('option', None)  # It's a string
 
         random_data = []
@@ -64,6 +71,8 @@ class GetDumbDataLineChartView(APIView):
 
 class GetDumbDataDoughnutChartView(APIView):
     def get(self, request):
+        request_count_doughnut_chart_metric.inc()
+
         option = request.query_params.get('option', None)  # It's a string
 
         if not option:

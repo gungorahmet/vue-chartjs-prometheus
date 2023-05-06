@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from metric.views import HelloWorldDataView, GetDumbDataLineChartView, GetDumbDataDoughnutChartView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('api/v1/helloworld', HelloWorldDataView.as_view()),
     path('api/v1/get_dumb_line_chart_data', GetDumbDataLineChartView.as_view()),
     path('api/v1/get_dumb_doughnut_chart_data', GetDumbDataDoughnutChartView.as_view()),
+    path('', include('django_prometheus.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -76,23 +76,23 @@ class GetDumbDataDoughnutChartView(APIView):
         option = request.query_params.get('option', None)  # It's a string
 
         if not option:
-            data = [10, 30, 40, 20]
+            data = [50, 50]
         elif option == "1":
-            data = [60, 10, 15, 15]
+            data = [99.98, 0.02]
         elif option == "2":
-            data = [40, 30, 20, 10]
+            data = [60.01, 39.99]
         elif option == "3":
-            data = [25, 25, 25, 25]
+            data = [35.52, 64.48]
         else:
-            data = [70, 10, 15, 5]
+            data = [90.12, 9.88]
 
         response = {
             'chart': {
                 'chartData': {
-                    'labels': ['Python', 'VueJs', 'TypeScript', 'JavaScript'],
+                    'labels': ['Up', 'Down'],
                     'datasets': [ 
                                     {
-                                    'backgroundColor': ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                                    'backgroundColor': ['#36A2EB', '#FF6384'],
                                     'data': data
                                     }
                                 ]

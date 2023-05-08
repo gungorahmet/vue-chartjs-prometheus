@@ -30,6 +30,17 @@ http://localhost:8000
 http://localhost:8001
 ```
 
+## Prometheus Metrics Endpoint
+
+```python
+http://localhost:8000/metrics
+```
+
+## Prometheus Server Dashboard
+
+```python
+http://localhost:9090
+```
 
 ## Run manually
 
